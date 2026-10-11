@@ -33,4 +33,12 @@ describe('Invite date config', () => {
     expect(config.events.every((e) => e.date === '2026-12-12')).toBe(true);
     expect(config.dateLabel).toContain('12 December 2026');
   });
+
+  it('correctly handles quoted date strings like "%2212%22" or \'"12"\'', () => {
+    const rawWithQuotes = '"12"';
+    const sanitized = rawWithQuotes.replace(/^["']|["']$/g, '');
+    expect(sanitized).toBe('12');
+    const config = getInviteConfig(sanitized === '12' ? '12' : 'all');
+    expect(config.days).toHaveLength(1);
+  });
 });

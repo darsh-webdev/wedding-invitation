@@ -524,8 +524,10 @@ export function Invitation({ side }: { side: Side }) {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const fromUrlName = urlParams.get('name')?.trim().slice(0, 80);
-    const fromUrlDate = urlParams.get('date')?.trim().toLowerCase();
+    const rawName = urlParams.get('name')?.trim().slice(0, 80);
+    const fromUrlName = rawName?.replace(/^["']|["']$/g, '');
+    const rawDate = urlParams.get('date')?.trim().toLowerCase();
+    const fromUrlDate = rawDate?.replace(/^["']|["']$/g, '');
 
     // Explicit date query param in URL determines date, otherwise defaults to both days ('all')
     const activeDate: InviteDateType =

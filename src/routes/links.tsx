@@ -76,11 +76,8 @@ function GuestLinks() {
 
         {(['bride', 'groom'] as Side[]).map((side) => {
           const dateQuery = inviteDate === '12' ? '&date=12' : '';
-          const url = `${origin}/${side}?name=${encodeURIComponent(name.trim())}${dateQuery}`;
-          const searchParams: Record<string, string> = { name: name.trim() };
-          if (inviteDate === '12') {
-            searchParams['date'] = '12';
-          }
+          const relativeUrl = `/${side}?name=${encodeURIComponent(name.trim())}${dateQuery}`;
+          const url = origin ? `${origin}${relativeUrl}` : relativeUrl;
 
           return (
             <div className="link-result" key={side}>
@@ -101,11 +98,11 @@ function GuestLinks() {
                   <Copy />
                   {COPY.copyLink}
                 </Button>
-                <Button variant="stationery" asChild>
-                  <Link to={side === 'bride' ? '/bride' : '/groom'} search={searchParams}>
+                <Button variant="stationery" asChild disabled={!name.trim()}>
+                  <a href={name.trim() ? relativeUrl : `/${side}`}>
                     {COPY.preview}
                     <ArrowUpRight />
-                  </Link>
+                  </a>
                 </Button>
               </div>
             </div>

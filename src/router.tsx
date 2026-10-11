@@ -10,6 +10,16 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    stringifySearch: (search) => {
+      const params = new URLSearchParams();
+      for (const [key, val] of Object.entries(search)) {
+        if (val !== undefined && val !== null && val !== '') {
+          params.set(key, typeof val === 'string' ? val : JSON.stringify(val));
+        }
+      }
+      const str = params.toString();
+      return str ? `?${str}` : '';
+    },
   });
 
   return router;
