@@ -74,6 +74,7 @@ function Countdown({ countdownTarget }: { countdownTarget?: string }) {
                 <AnimatePresence mode="popLayout" initial={false}>
                   <motion.div
                     key={value}
+                    className="countdown-digit"
                     initial={reduced ? false : { y: 18, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -18, opacity: 0 }}
@@ -592,11 +593,12 @@ export function Invitation({ side }: { side: Side }) {
         <Lanterns pulse={pulse} />
         <Florals />
         <div className="story-topbar">
-          <Link to="/" className="monogram" aria-label={COPY.back}>
-            {side === 'bride' ? 'Y & V' : 'V & Y'}
-          </Link>
-          <span className="eyebrow">{COPY.sideLabels[side]}</span>
-        </div>
+          {
+            COPY.sideLabels.map(label => (
+              <p className="eyebrow">{label}</p>
+            ))
+          }
+         </div>
         <div className="hero-content">
           <motion.div
             initial={false}
@@ -660,7 +662,8 @@ export function Invitation({ side }: { side: Side }) {
           <ChevronDown size={17} strokeWidth={1} />
         </div>
       </section>
-      <section className="paper-section">
+      <section className="paper-section couple-section">
+        <Lanterns count={8} />
         <div className="section-inner">
           <Chapter data={COPY.chapters.couple} />
           <div className="portraits">
@@ -670,6 +673,7 @@ export function Invitation({ side }: { side: Side }) {
                   <img
                     src={IMAGES[person]}
                     alt={COPY.portraits[person].name}
+                    className={`portrait-photo portrait-${person}`}
                     loading="lazy"
                     width="512"
                     height="1024"
@@ -698,8 +702,8 @@ export function Invitation({ side }: { side: Side }) {
         subtitle={inviteConfig.celebrationsSubtitle}
       />
       <Gallery />
-      <Finale guest={guest} dateLabel={inviteConfig.dateLabel} />
       <Families side={side} />
+      <Finale guest={guest} dateLabel={inviteConfig.dateLabel} />
       <footer className="story-footer">
         <p>{COPY.shareMoments}</p>
         <Button variant="ghost" className="hashtag-main" onClick={() => copyText(HASHTAGS.main)}>

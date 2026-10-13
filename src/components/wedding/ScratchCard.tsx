@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { CalendarDays, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { COPY } from '@/data/config.ts';
+import { COPY, IMAGES } from '@/data/config.ts';
 import { addCalendar, Flourish, Reveal } from './shared';
 
 export function ScratchCard({
@@ -39,37 +39,57 @@ export function ScratchCard({
     onReveal();
   };
   useEffect(() => {
+    let active = true;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) return;
-    canvas.width = 592;
-    canvas.height = 538;
-    const root = getComputedStyle(document.documentElement);
-    const gold = root.getPropertyValue('--gold').trim();
-    const pale = root.getPropertyValue('--seal-highlight').trim();
-    const gradient = ctx.createLinearGradient(0, 0, 592, 538);
-    gradient.addColorStop(0, pale);
-    gradient.addColorStop(0.45, gold);
-    gradient.addColorStop(1, pale);
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 592, 538);
-    for (let i = 0; i < 1700; i++) {
-      const x = (i * 137.7) % 592;
-      const y = (i * 83.3) % 538;
-      ctx.globalAlpha = 0.12 + (i % 4) * 0.06;
-      ctx.fillStyle = root.getPropertyValue('--background').trim();
-      ctx.fillRect(x, y, 2, 2);
+
+    const drawCard = () => {
+      if (!active || !canvas) return;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      if (!ctx) return;
+      canvas.width = 592;
+      canvas.height = 538;
+      const root = getComputedStyle(document.documentElement);
+      const gold = root.getPropertyValue('--gold').trim() || '#c5a059';
+      const pale = root.getPropertyValue('--seal-highlight').trim() || '#e8d4a2';
+      const gradient = ctx.createLinearGradient(0, 0, 592, 538);
+      gradient.addColorStop(0, pale);
+      gradient.addColorStop(0.45, gold);
+      gradient.addColorStop(1, pale);
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 592, 538);
+      for (let i = 0; i < 1700; i++) {
+        const x = (i * 137.7) % 592;
+        const y = (i * 83.3) % 538;
+        ctx.globalAlpha = 0.12 + (i % 4) * 0.06;
+        ctx.fillStyle = root.getPropertyValue('--background').trim() || '#fff';
+        ctx.fillRect(x, y, 2, 2);
+      }
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = root.getPropertyValue('--primary-foreground').trim() || '#fff';
+      ctx.textAlign = 'center';
+      ctx.font = '46px Georgia';
+      ctx.fillText('✧', 296, 205);
+      ctx.font = '600 50px "Cormorant Garamond", Georgia, serif';
+      const words = COPY.scratchHint.split(' ');
+      const line1 = words.length > 3 ? words.slice(0, 3).join(' ') : 'Scratch to reveal';
+      const line2 =
+        words.length > 3 ? words.slice(3).join(' ') : (words[words.length - 1] ?? 'dates');
+      ctx.fillText(line1, 296, 275);
+      ctx.fillText(line2, 296, 338);
+    };
+
+    drawCard();
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(() => {
+        if (active && !revealed) drawCard();
+      });
     }
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = root.getPropertyValue('--primary-foreground').trim();
-    ctx.textAlign = 'center';
-    ctx.font = '35px Georgia';
-    ctx.fillText(COPY.scratchHint.split(' ').slice(0, 3).join(' '), 296, 286);
-    ctx.fillText(COPY.scratchHint.split(' ').slice(3).join(' '), 296, 330);
-    ctx.font = '40px Georgia';
-    ctx.fillText('✧', 296, 222);
-  }, []);
+
+    return () => {
+      active = false;
+    };
+  }, [revealed]);
   function erase(event: PointerEvent<HTMLCanvasElement>) {
     if (revealed || !last.current) return;
     const canvas = canvasRef.current;
@@ -108,6 +128,7 @@ export function ScratchCard({
   }
   return (
     <section id="save-the-date" className="paper-section scratch-section">
+      <img className="scratch-bg-art" src={IMAGES.hero} alt="" aria-hidden="true" />
       <div className="section-inner">
         <Reveal>
           <span className="eyebrow">{COPY.scratchEyebrow}</span>

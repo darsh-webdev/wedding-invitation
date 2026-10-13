@@ -93,8 +93,8 @@ export function getInviteConfig(dateType: InviteDateType = 'all') {
   };
 }
 
-export const GALLERY = Array.from({ length: 8 }, (_, i) => ({
-  src: `/images/gallery/${i + 1}.jpg`,
+export const GALLERY = Array.from({ length: 4 }, (_, i) => ({
+  src: `/images/gallery/${i + 1}.JPEG`,
   alt: `A painted memory of Vicky and Yashi, page ${i + 1}`,
   caption: [
     'A little magic',
@@ -109,8 +109,8 @@ export const GALLERY = Array.from({ length: 8 }, (_, i) => ({
 }));
 export const IMAGES = {
   hero: '/images/hero.jpg',
-  bride: '/images/bride.png',
-  groom: '/images/groom.png',
+  bride: '/images/bride.jpg',
+  groom: '/images/groom.JPEG',
   map: '/images/map.jpg',
   finale: '/images/finale.jpg',
   couple: '/images/couple.png',
@@ -125,7 +125,7 @@ export const COPY = {
   brideLink: 'The bride’s invitation',
   groomLink: 'The groom’s invitation',
   helperLink: 'Create a guest invitation',
-  sideLabels: { bride: 'FROM THE BRIDE’S FAMILY', groom: 'FROM THE GROOM’S FAMILY' },
+  sideLabels: [, `|| श्री अंतरिक्ष पार्श्वनाथाय नमः ||`, `|| ॐ श्री गणेशाय नमः ||`],
   gateEyebrow: 'A LITTLE ENVELOPE. A BIG CELEBRATION.',
   gateTitle: 'A story with you in it',
   gatePrompt: 'Please enter your name to open your invitation',
@@ -173,7 +173,7 @@ export const COPY = {
   units: ['Days', 'Hours', 'Minutes', 'Seconds'],
   scratchEyebrow: 'A LITTLE SURPRISE, JUST FOR YOU',
   scratchTitle: 'Some dates are worth keeping',
-  scratchHint: 'Scratch to reveal the dates',
+  scratchHint: 'Scratch to reveal dates',
   scratchAccessible: 'Reveal the wedding dates',
   scratchPersonal: (name: string) => `${name}, save the dates!`,
   calendar: 'Add to Calendar',
