@@ -593,12 +593,12 @@ export function Invitation({ side }: { side: Side }) {
         <Lanterns pulse={pulse} />
         <Florals />
         <div className="story-topbar">
-          {
-            COPY.sideLabels.map(label => (
-              <p className="eyebrow">{label}</p>
-            ))
-          }
-         </div>
+          {COPY.sideLabels[side].map((label) => (
+            <p key={label} className="eyebrow">
+              {label}
+            </p>
+          ))}
+        </div>
         <div className="hero-content">
           <motion.div
             initial={false}

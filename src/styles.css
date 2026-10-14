@@ -196,12 +196,23 @@ h3 {
 .story-topbar {
   position: absolute;
   z-index: 4;
-  top: 28px;
-  left: 40px;
-  right: 40px;
+  top: 24px;
+  left: 20px;
+  right: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+
+.story-topbar .eyebrow {
+  margin: 0;
+  line-height: 1.4;
+  font-size: 16px !important;
+  letter-spacing: 0.05em;
+  text-transform: none;
 }
 
 .monogram {
@@ -1449,13 +1460,15 @@ h3 {
   }
 
   .story-topbar {
-    left: 23px;
-    right: 20px;
-    top: 22px;
+    left: 12px;
+    right: 12px;
+    top: 18px;
+    gap: 3px;
   }
 
   .story-topbar .eyebrow {
-    font-size: 8px;
+    font-size: 13px !important;
+    line-height: 1.35;
   }
 
   .hero-content {

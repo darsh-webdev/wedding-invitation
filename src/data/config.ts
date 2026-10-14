@@ -125,7 +125,10 @@ export const COPY = {
   brideLink: 'The bride’s invitation',
   groomLink: 'The groom’s invitation',
   helperLink: 'Create a guest invitation',
-  sideLabels: [, `|| श्री अंतरिक्ष पार्श्वनाथाय नमः ||`, `|| ॐ श्री गणेशाय नमः ||`],
+  sideLabels: {
+    bride: [`|| श्री अंतरिक्ष पार्श्वनाथाय नमः ||`, `|| ॐ श्री गणेशाय नमः ||`],
+    groom: [`|| श्री शंखेश्वर पार्श्वनाथाय नमः ||`, `|| श्री अम्बे मातायै नमः ||`],
+  },
   gateEyebrow: 'A LITTLE ENVELOPE. A BIG CELEBRATION.',
   gateTitle: 'A story with you in it',
   gatePrompt: 'Please enter your name to open your invitation',
