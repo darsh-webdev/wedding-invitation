@@ -126,8 +126,8 @@ export const COPY = {
   groomLink: 'The groom’s invitation',
   helperLink: 'Create a guest invitation',
   sideLabels: {
-    bride: [`|| श्री अंतरिक्ष पार्श्वनाथाय नमः ||`, `|| ॐ श्री गणेशाय नमः ||`],
-    groom: [`|| श्री शंखेश्वर पार्श्वनाथाय नमः ||`, `|| श्री अम्बे मातायै नमः ||`],
+    bride: [`|| श्री अंतरिक्ष पार्श्वनाथाय नमः ||`, `|| श्री गणेशाय नमः ||`],
+    groom: [`|| श्री शंखेश्वर पार्श्वनाथाय नमः ||`, `|| श्री अम्बे माताय नमः ||`],
   },
   gateEyebrow: 'A LITTLE ENVELOPE. A BIG CELEBRATION.',
   gateTitle: 'A story with you in it',
@@ -212,7 +212,7 @@ export const COPY = {
   preview: 'Preview',
   back: 'Back to the storybook',
 };
-export const FAMILY_GROUPS = [
+export const BRIDE_FAMILY_GROUPS = [
   ['divineBlessing', 'DIVINE BLESSING – DADAJI'],
   ['preciousBlessing', 'PRECIOUS BLESSING – DADIJI'],
   ['specialRegards', 'SPECIAL REGARDS'],
@@ -221,5 +221,15 @@ export const FAMILY_GROUPS = [
   ['withLove', 'WITH LOVE'],
   ['littleWelcome', 'LITTLE WELCOME'],
   ['happyHeart', 'HAPPY HEART'],
-  ['firm', 'FIRM'],
 ] as const;
+
+export const GROOM_FAMILY_GROUPS = [
+  ['awaitingPresence', 'Awaiting Presence'],
+  ['specialInvitation', 'Special Invitation'],
+  ['nanihalPaksh', 'Nanihal Paksh'],
+  ['weLookForwardToWelcomeYou', 'We Look Forward To Welcome You'],
+  ['happyHeart', 'Happy Heart'],
+  ['firm', 'Firm'],
+] as const;
+
+export const FAMILY_GROUPS = BRIDE_FAMILY_GROUPS;

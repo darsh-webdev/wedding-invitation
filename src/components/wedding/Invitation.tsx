@@ -1,11 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from '@tanstack/react-router';
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import {
   CalendarDays,
-  Clock3,
   MapPin,
-  Shirt,
   Navigation,
   Copy,
   ChevronDown,
@@ -22,7 +19,8 @@ import {
   COUNTDOWN_TARGET,
   DAYS,
   EVENTS,
-  FAMILY_GROUPS,
+  BRIDE_FAMILY_GROUPS,
+  GROOM_FAMILY_GROUPS,
   GALLERY,
   HASHTAGS,
   IMAGES,
@@ -33,7 +31,7 @@ import {
   type InviteDateType,
   type Side,
 } from '@/data/config.ts';
-import { brideFamily, groomFamily } from '@/data/families.ts';
+import { brideFamily, groomFamily, type FamilyEntry } from '@/data/families.ts';
 import { addCalendar, Chapter, copyText, Florals, Flourish, Lanterns, Reveal } from './shared.tsx';
 import { Envelope } from './Envelope';
 import { ScratchCard } from './ScratchCard.tsx';
@@ -475,15 +473,18 @@ function Finale({ guest, dateLabel }: { guest: string; dateLabel?: string }) {
 }
 
 function Families({ side }: { side: Side }) {
-  const family = side === 'bride' ? brideFamily : groomFamily;
+  const isBride = side === 'bride';
+  const family = isBride ? brideFamily : groomFamily;
+  const groups = isBride ? BRIDE_FAMILY_GROUPS : GROOM_FAMILY_GROUPS;
+
   return (
     <section className="paper-section family-section">
       <div className="section-inner">
         <Chapter data={COPY.chapters.welcome} />
         <div className="family-groups">
-          {FAMILY_GROUPS.map(([key, label]) => {
-            const entries = family[key];
-            if (!entries?.length || (key === 'firm' && side === 'bride')) return null;
+          {groups.map(([key, label]) => {
+            const entries = (family as Record<string, FamilyEntry[] | undefined>)[key];
+            if (!entries?.length) return null;
             return (
               <Reveal key={key} className="family-group">
                 <h3>{label}</h3>

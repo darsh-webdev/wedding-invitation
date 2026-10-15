@@ -1,5 +1,6 @@
-export type FamilyEntry = { name: string; relation: string; message?: string };
-export type Family = {
+export type FamilyEntry = { name: string; relation?: string; message?: string };
+
+export type BrideFamily = {
   divineBlessing: FamilyEntry[];
   preciousBlessing: FamilyEntry[];
   specialRegards: FamilyEntry[];
@@ -8,35 +9,65 @@ export type Family = {
   withLove: FamilyEntry[];
   littleWelcome: FamilyEntry[];
   happyHeart: FamilyEntry[];
-  firm?: FamilyEntry[];
   pending: FamilyEntry[];
 };
-const entry = (name: string, relation = ''): FamilyEntry => ({ name, relation });
-export const groomFamily: Family = {
-  divineBlessing: [entry('Late Shri Surajmalji Chogmalji Jain')],
-  preciousBlessing: [entry('Smt. Rantanben Surajmalji Jain')],
-  specialRegards: [
-    entry('Sangeeta Rajkumar Jain', 'Mom'),
-    entry('Sangeeta Bharat Jain', 'Chachi'),
-    entry('Shilpa Sanjay Jain', '2nd Chachi'),
-  ],
-  lovingWishes: [
-    entry('Gunvati Sureshkumarji Bagla', 'eldest Bua'),
-    entry('Shakuntala Dineshji Parmar', 'Bua'),
-  ],
-  nanihalPaksh: [entry('Smt. Sukhibai Sukjhrajji Jain', 'Nani')],
-  withLove: [
-    entry('Jinisha Nikesh Jain', 'Bhabhi'),
-    entry('Surbhi Rushabji Jain'),
-    entry('Yashika Jigarji Jain'),
-    entry('Harsh Bharat Jain'),
-    entry('Daksh Bharat Jain'),
-  ],
-  littleWelcome: [entry('Vihana Nikesh Jain', 'Niece')],
-  happyHeart: [],
-  firm: [entry('Shree Meenakshi Textile')],
-  pending: [entry('Late Arvindkumar Jain (Sangeeta Rajkumar Jain)')],
+
+export type GroomFamily = {
+  awaitingPresence: FamilyEntry[];
+  specialInvitation: FamilyEntry[];
+  nanihalPaksh: FamilyEntry[];
+  weLookForwardToWelcomeYou: FamilyEntry[];
+  happyHeart: FamilyEntry[];
+  firm: FamilyEntry[];
+  'Awaiting Presence'?: FamilyEntry[];
+  'Special Invitation'?: FamilyEntry[];
+  'Nanihal Paksh'?: FamilyEntry[];
+  'We look forward to Welcome You'?: FamilyEntry[];
+  'We Look Forward To Welcome You'?: FamilyEntry[];
+  'Happy Heart'?: FamilyEntry[];
+  'Firm'?: FamilyEntry[];
 };
+
+export type Family = Partial<BrideFamily & GroomFamily>;
+
+const entry = (name: string, relation = '', message?: string): FamilyEntry => ({
+  name,
+  relation,
+  ...(message ? { message } : {}),
+});
+
+export const groomFamily: GroomFamily = {
+  awaitingPresence: [
+    entry('Rajkumar, Bharat, Sanjay'),
+    entry('Smt Sangeeta Rajkumar'),
+    entry('Smt Sangeeta Bharat'),
+    entry('Smt Shilpa Sanjay'),
+  ],
+  specialInvitation: [
+    entry('Smt Gunvanti Sureshji Bagla'),
+    entry('Smt Shakuntala Dineshji Parmar'),
+  ],
+  nanihalPaksh: [
+    entry('Smt Sukhibai Sukhrajji Jain (Koselao)'),
+  ],
+  weLookForwardToWelcomeYou: [
+    entry('Surbhi-Rushabji, Yashika-Jigarji, Harsh, Daksh'),
+  ],
+  happyHeart: [
+    entry('Vihana Jain', '', 'Mere chachu ki shaadi mein jarur jarur aana'),
+  ],
+  firm: [
+    entry('Shree Meenakshi Textile'),
+  ],
+};
+
+groomFamily['Awaiting Presence'] = groomFamily.awaitingPresence;
+groomFamily['Special Invitation'] = groomFamily.specialInvitation;
+groomFamily['Nanihal Paksh'] = groomFamily.nanihalPaksh;
+groomFamily['We look forward to Welcome You'] = groomFamily.weLookForwardToWelcomeYou;
+groomFamily['We Look Forward To Welcome You'] = groomFamily.weLookForwardToWelcomeYou;
+groomFamily['Happy Heart'] = groomFamily.happyHeart;
+groomFamily['Firm'] = groomFamily.firm;
 export const brideFamily: Family = {
   divineBlessing: [entry('Late Shri Umedmalji Babulalji Jain')],
   preciousBlessing: [
