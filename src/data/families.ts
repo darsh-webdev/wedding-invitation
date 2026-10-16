@@ -14,16 +14,19 @@ export type BrideFamily = {
 
 export type GroomFamily = {
   awaitingPresence: FamilyEntry[];
+  warmRegards: FamilyEntry[];
   specialInvitation: FamilyEntry[];
   nanihalPaksh: FamilyEntry[];
+  withLove: FamilyEntry[];
   weLookForwardToWelcomeYou: FamilyEntry[];
   happyHeart: FamilyEntry[];
   firm: FamilyEntry[];
   'Awaiting Presence'?: FamilyEntry[];
+  'Warm Regards'?: FamilyEntry[];
   'Special Invitation'?: FamilyEntry[];
   'Nanihal Paksh'?: FamilyEntry[];
+  'With Love'?: FamilyEntry[];
   'We look forward to Welcome You'?: FamilyEntry[];
-  'We Look Forward To Welcome You'?: FamilyEntry[];
   'Happy Heart'?: FamilyEntry[];
   'Firm'?: FamilyEntry[];
 };
@@ -39,6 +42,8 @@ const entry = (name: string, relation = '', message?: string): FamilyEntry => ({
 export const groomFamily: GroomFamily = {
   awaitingPresence: [
     entry('Rajkumar, Bharat, Sanjay'),
+  ],
+  warmRegards: [
     entry('Smt Sangeeta Rajkumar'),
     entry('Smt Sangeeta Bharat'),
     entry('Smt Shilpa Sanjay'),
@@ -49,6 +54,9 @@ export const groomFamily: GroomFamily = {
   ],
   nanihalPaksh: [
     entry('Smt Sukhibai Sukhrajji Jain (Koselao)'),
+  ],
+  withLove: [
+    entry('Jinisha Nikesh Jain'),
   ],
   weLookForwardToWelcomeYou: [
     entry('Surbhi-Rushabji, Yashika-Jigarji, Harsh, Daksh'),
@@ -65,9 +73,9 @@ groomFamily['Awaiting Presence'] = groomFamily.awaitingPresence;
 groomFamily['Special Invitation'] = groomFamily.specialInvitation;
 groomFamily['Nanihal Paksh'] = groomFamily.nanihalPaksh;
 groomFamily['We look forward to Welcome You'] = groomFamily.weLookForwardToWelcomeYou;
-groomFamily['We Look Forward To Welcome You'] = groomFamily.weLookForwardToWelcomeYou;
 groomFamily['Happy Heart'] = groomFamily.happyHeart;
 groomFamily['Firm'] = groomFamily.firm;
+
 export const brideFamily: Family = {
   divineBlessing: [entry('Late Shri Umedmalji Babulalji Jain')],
   preciousBlessing: [

@@ -14,7 +14,7 @@ export const TITLES = { bride: 'Yashi weds Vicky Ji', groom: 'Vicky weds Yashi' 
 export const META = {
   description: `Vicky & Yashi's wedding, 11 & 12 December 2026 ${HASHTAGS.short}`,
   theme: '#fdf8ef',
-  ogImage: '/images/og-cover.jpg',
+  ogImage: 'https://res.cloudinary.com/shuc48yn/image/upload/v1792082894/og-cover.jpg',
 };
 export const EVENTS = [
   {
@@ -94,7 +94,7 @@ export function getInviteConfig(dateType: InviteDateType = 'all') {
 }
 
 export const GALLERY = Array.from({ length: 4 }, (_, i) => ({
-  src: `/images/gallery/${i + 1}.JPEG`,
+  src: `https://res.cloudinary.com/shuc48yn/image/upload/v1792083048/${i + 1}.jpg`,
   alt: `A painted memory of Vicky and Yashi, page ${i + 1}`,
   caption: [
     'A little magic',
@@ -108,12 +108,12 @@ export const GALLERY = Array.from({ length: 4 }, (_, i) => ({
   ][i],
 }));
 export const IMAGES = {
-  hero: '/images/hero.jpg',
-  bride: '/images/bride.jpg',
-  groom: '/images/groom.JPEG',
+  hero: 'https://res.cloudinary.com/shuc48yn/image/upload/v1792082894/hero.jpg',
+  bride: 'https://res.cloudinary.com/shuc48yn/image/upload/v1792082743/bride.jpg',
+  groom: 'https://res.cloudinary.com/shuc48yn/image/upload/v1792082744/groom.jpg',
   map: '/images/map.jpg',
-  finale: '/images/finale.jpg',
-  couple: '/images/couple.png',
+  finale: 'https://res.cloudinary.com/shuc48yn/image/upload/v1792082893/finale.jpg',
+  couple: 'https://res.cloudinary.com/shuc48yn/image/upload/v1792082784/shaadi.png',
 };
 export const COPY = {
   close: 'Close photo',
@@ -199,7 +199,7 @@ export const COPY = {
   finalePersonal: (name: string) => `We can’t wait to celebrate with you, ${name}`,
   closing: 'With all our love, Vicky & Yashi',
   wishMessage: 'Your wish is on its way ✨',
-  footer: 'Made with ❤️ for our people',
+  footer: 'Made with ❤️ by Darshan Rajput',
   shareMoments: 'Share your moments with us using',
   copied: 'Copied! 💕',
   copyFailed: 'Copy unavailable — please copy the text manually.',
@@ -225,8 +225,10 @@ export const BRIDE_FAMILY_GROUPS = [
 
 export const GROOM_FAMILY_GROUPS = [
   ['awaitingPresence', 'Awaiting Presence'],
+  ['warmRegards', 'Warm Regards'],
   ['specialInvitation', 'Special Invitation'],
   ['nanihalPaksh', 'Nanihal Paksh'],
+  ['withLove', 'With Love'],
   ['weLookForwardToWelcomeYou', 'We Look Forward To Welcome You'],
   ['happyHeart', 'Happy Heart'],
   ['firm', 'Firm'],

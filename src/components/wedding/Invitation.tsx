@@ -299,7 +299,7 @@ function Celebrations({
                         <p>{event.description}</p>
                       </Reveal>
                       <motion.img
-                        src={`/images/events/${event.outfit}.png`}
+                        src={`https://res.cloudinary.com/shuc48yn/image/upload/v1792082784/${event.outfit}.png`}
                         alt={`${COUPLE.bride} and ${COUPLE.groom} · ${event.name}`}
                         className="event-art"
                         loading="lazy"
@@ -487,7 +487,7 @@ function Families({ side }: { side: Side }) {
             if (!entries?.length) return null;
             return (
               <Reveal key={key} className="family-group">
-                <h3>{label}</h3>
+                <h3>{label.toUpperCase()}</h3>
                 {entries.map((person) => (
                   <p key={person.name}>
                     {person.name}
