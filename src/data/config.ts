@@ -7,7 +7,7 @@ export const COUNTDOWN_TARGET = '2026-12-11T12:00:00+05:30';
 export const VENUE = {
   name: 'Nandi Baag Resort',
   address:
-    '100 Feet Road, opposite Aashiana lawns, Near Shani temple, Satara-Phaltan Road, Karad, Maharashtra 415101',
+    `Vaijanath, Tata Power Road, near Pali Bridge, Karjat, Maharashtra 410201`,
   dressCode: 'A little festive, a little fabulous',
 };
 export const TITLES = { bride: 'Yashi weds Vicky Ji', groom: 'Vicky weds Yashi' };
@@ -137,10 +137,29 @@ export const COPY = {
   skip: 'Skip intro',
   reset: 'Not you?',
   nameRequired: 'Please enter your name.',
-  dear: (name: string) => `Dear ${name}, you are warmly invited`,
+  dear: (name: string) =>
+    name ? `Dear ${name}, you are warmly invited by` : 'You are warmly invited by',
+  grandmothers: {
+    groom: 'Smt Ratanben Surajmalji Jain',
+    bride: 'Smt Mohiniben Umedmalji Jain',
+  },
+  occasions: {
+    groom: 'To Grace the Auspicious Occasion of the Wedding Ceremony of Her Beloved Grandson',
+    bride: 'To Grace the Auspicious Occasion of the Wedding Ceremony of Her Beloved Granddaughter',
+  },
+  lineage: {
+    groom: [
+      'G/S/O Smt Ratanben Surajmalji Jain (Bhuti)',
+      'S/O Late Arvindkumar (Sangeeta Rajkumar Jain)',
+    ],
+    bride: [
+      'G/D/O Smt Mohiniben Umedmalji Jain (Takhatgarh)',
+      'D/O Smt Shilpa Ramanlal Jain',
+    ],
+  },
   together: 'Together with our families',
   weds: 'weds',
-  tagline: 'Some stories are written in the stars. Ours begins with you.',
+  tagline: 'Some stories are written in the stars. Theirs begins with you.',
   saveDate: 'Save the Date',
   date: '11 & 12 December 2026',
   heroBottom: 'SCROLL TO TURN THE PAGE',
@@ -152,9 +171,9 @@ export const COPY = {
       'A place for laughter, love, and all our favourite people.',
     ],
     celebrations: ['Chapter Three', 'The Celebrations', 'Four pages, two days'],
-    gallery: ['Chapter Four', 'Painted moments', 'A few pages from the album'],
+    gallery: ['Chapter Five', 'Painted moments', 'A few pages from the album'],
     welcome: [
-      'Chapter Five',
+      'Chapter Four',
       'Warm Welcome',
       'With blessings, open arms, and hearts full of love.',
     ],

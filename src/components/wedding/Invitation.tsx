@@ -32,7 +32,7 @@ import {
   type Side,
 } from '@/data/config.ts';
 import { brideFamily, groomFamily, type FamilyEntry } from '@/data/families.ts';
-import { addCalendar, Chapter, copyText, Florals, Flourish, Lanterns, Reveal } from './shared.tsx';
+import { Chapter, copyText, Florals, Flourish, Lanterns, Reveal } from './shared.tsx';
 import { Envelope } from './Envelope';
 import { ScratchCard } from './ScratchCard.tsx';
 
@@ -91,84 +91,6 @@ function Countdown({ countdownTarget }: { countdownTarget?: string }) {
   );
 }
 
-function MapPlate() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '690%']);
-  const y = useTransform(scrollYProgress, [0, 0.5, 1], [0, -18, 4]);
-  const reduced = useReducedMotion();
-  const [custom, setCustom] = useState(true);
-  return (
-    <div className="map-plate" ref={ref}>
-      {custom && (
-        <img
-          src={IMAGES.map}
-          alt={COPY.mapPending}
-          loading="lazy"
-          onError={() => setCustom(false)}
-        />
-      )}
-      <svg
-        className="map-scene"
-        viewBox="0 0 600 250"
-        aria-hidden="true"
-        style={{ opacity: custom ? 0 : 1 }}
-      >
-        <path
-          d="M0 210Q110 155 215 190T390 158T610 130"
-          fill="none"
-          stroke="var(--border)"
-          strokeWidth="24"
-        />
-        <path
-          d="M0 210Q110 155 215 190T390 158T610 130"
-          fill="none"
-          stroke="var(--background)"
-          strokeWidth="16"
-        />
-        <path
-          d="M0 210Q110 155 215 190T390 158T610 130"
-          fill="none"
-          stroke="var(--gold)"
-          strokeWidth="1.5"
-          strokeDasharray="5 8"
-        />
-        {[70, 145, 380, 480].map((cx, i) => (
-          <g key={cx} transform={`translate(${cx} ${90 + (i % 2) * 25})`}>
-            <path d="M0 55V8Q10-15 20 8V55" fill="var(--blush)" stroke="var(--gold)" />
-            <path d="M-8 55H28" stroke="var(--gold)" />
-            <path d="M8 55V33q2-9 5 0v22" fill="var(--background)" />
-          </g>
-        ))}
-        {[35, 235, 325, 550].map((cx, i) => (
-          <g key={cx} transform={`translate(${cx} ${125 - (i % 2) * 65})`}>
-            <path d="M0 35V0" stroke="var(--gold)" />
-            <ellipse
-              cy="-5"
-              rx="15"
-              ry="24"
-              fill="var(--accent)"
-              stroke="var(--gold)"
-              strokeWidth=".5"
-            />
-          </g>
-        ))}
-        <path
-          d="M265 150V88h50v62M254 91h72M265 88q25-39 50 0"
-          fill="var(--blush)"
-          stroke="var(--gold)"
-        />
-        <path d="M281 150v-32q9-22 18 0v32" fill="var(--background)" stroke="var(--gold)" />
-        <path d="M270 97h6v10h-6m28-10h6v10h-6" stroke="var(--gold)" />
-      </svg>
-      <motion.div className="map-car" style={{ x: reduced ? 0 : x, y: reduced ? 0 : y }}>
-        <CarFront className="h-full w-full" strokeWidth={1.3} />
-        <Heart className="absolute left-5 top-2 size-3 fill-blush" />
-      </motion.div>
-    </div>
-  );
-}
-
 function Details({
   days,
   events,
@@ -190,18 +112,6 @@ function Details({
     <section className="paper-section details-section">
       <div className="section-inner">
         <Chapter data={COPY.chapters.details} />
-        <div className="action-row">
-          <Button variant="invitation" onClick={() => addCalendar(days, events)}>
-            <CalendarDays />
-            {COPY.calendar}
-          </Button>
-          <Button variant="stationery" asChild>
-            <a href={MAP_LINK} target="_blank" rel="noreferrer">
-              <Navigation />
-              {COPY.directions}
-            </a>
-          </Button>
-        </div>
         <Reveal>
           <div className="map-embed">
             {MAP_EMBED_URL ? (
@@ -221,13 +131,13 @@ function Details({
             )}
           </div>
           <div className="action-row">
-            <Button variant="stationery" asChild>
-              <a href={MAP_LINK} target="_blank" rel="noreferrer">
-                <MapPin />
-                {COPY.openMaps}
-              </a>
+            <Button variant="invitation" asChild>
+            <a href={MAP_LINK} target="_blank" rel="noreferrer">
+              <Navigation />
+              {COPY.directions}
+            </a>
             </Button>
-            <Button variant="ghost" onClick={() => copyText(VENUE.address)}>
+            <Button variant="ghost" onClick={() => copyText(`${VENUE.name}, ${VENUE.address}`)}>
               <Copy />
               {COPY.copyAddress}
             </Button>
@@ -610,19 +520,9 @@ export function Invitation({ side }: { side: Side }) {
             }}
             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="guest-line">
-              {COPY.dear(guest)}{' '}
-              {guest && (
-                <Button
-                  variant="link"
-                  className="h-auto p-0 text-[10px] text-muted-foreground"
-                  onClick={reset}
-                >
-                  {COPY.reset}
-                </Button>
-              )}
-            </p>
-            <p className="hero-together">{COPY.together}</p>
+            <p className="guest-line">{COPY.dear(guest)}</p>
+            <h2 className="hero-grandmother">{COPY.grandmothers[side]}</h2>
+            <p className="hero-occasion">{COPY.occasions[side]}</p>
             <h1 className="hero-names">
               <motion.span
                 initial={false}
@@ -641,6 +541,19 @@ export function Invitation({ side }: { side: Side }) {
                 {side === 'bride' ? COPY.ji : ''}
               </motion.span>
             </h1>
+            <div className="hero-lineage-container">
+              <div className="lineage-side">
+                {COPY.lineage[first].map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
+              <span className="lineage-with">with</span>
+              <div className="lineage-side">
+                {COPY.lineage[second].map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
+            </div>
             <p className="hero-tagline">{COPY.tagline}</p>
             <span className="hashtag-chip">{HASHTAGS.main}</span>
             <p className="hero-date">{inviteConfig.dateLabel}</p>
@@ -702,8 +615,8 @@ export function Invitation({ side }: { side: Side }) {
         events={inviteConfig.events}
         subtitle={inviteConfig.celebrationsSubtitle}
       />
-      <Gallery />
       <Families side={side} />
+      <Gallery />
       <Finale guest={guest} dateLabel={inviteConfig.dateLabel} />
       <footer className="story-footer">
         <p>{COPY.shareMoments}</p>
